@@ -18,7 +18,7 @@ Neovim is an hyperextensible Vim-based text editor
 ### Installation
 
 To install Neovim [here](https://github.com/neovim/neovim/wiki/Installing-Neovim) you will find the ways
-to install Neovim according to you system.
+to install Neovim according to your system.
 
 I will use `homebrew` to install Neovim.
 

@@ -12,12 +12,11 @@ description: I will show you how to use pyenv in dev environment
 ---
 
 ## Table of contents
-
 ## Installation
 
 ### Pyenv
 
-Install `pyenv`, if you want more information you can go to [Github](https://github.com/pyenv/pyenv) Repository.
+Install `pyenv`, if you want more information you can go to [Github](https://github.com/pyenv/pyenv) repository.
 
 ```bash
 brew update
