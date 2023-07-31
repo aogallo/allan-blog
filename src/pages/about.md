@@ -11,4 +11,30 @@ I'm a developer
 
 ## Tech Stack
 
-## Features
+### Frontend
+
+* Javacript
+* Typescript
+* CSS
+* styled-components
+* ReactJs
+
+### Backend
+
+* Javacript
+* Typescript
+* Python
+
+### Database
+
+* Mongo
+* SQL Server
+* AWS QLDB
+
+### Cloud (AWS)
+
+* Lambda
+* API Gateway
+* S3
+* Data lakes
+* Apache Airflow
