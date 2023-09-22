@@ -8,11 +8,15 @@ draft: false
 tags:
   - vim
   - neovim
-ogImage: ""
+ogImage: https://w7.pngwing.com/pngs/950/109/png-transparent-vim-computer-icons-text-editor-skk-cursor-others-angle-rectangle-triangle-thumbnail.png
 description: This guide will help you to know how to move in Vim
 ---
 
-## Cursor
+![](https://w7.pngwing.com/pngs/950/109/png-transparent-vim-computer-icons-text-editor-skk-cursor-others-angle-rectangle-triangle-thumbnail.png)
+
+## Table of contents
+
+## Cursor motions
 
 ### Normal Mode
 
@@ -22,9 +26,12 @@ description: This guide will help you to know how to move in Vim
 - l - move to right
 - gg - move to the top
 - G - move to the end
-- <C-d> -
 
 ## Operators
 
+### Normal Mode
+
 - y/d/c - yank/delete/change
 - gu/gU - change case
+- v - start visual mode per character
+- V - start visual mode linewise
