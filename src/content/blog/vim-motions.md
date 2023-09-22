@@ -35,3 +35,16 @@ description: This guide will help you to know how to move in Vim
 - gu/gU - change case
 - v - start visual mode per character
 - V - start visual mode linewise
+
+- va{% - delete all inside the curly braices included it
+
+```ts
+const onSubmit = async (event) => {
+    event.preventDefault()
+
+    console.log(event.target.value)
+}
+```
+```ts
+const onSubmit = async (event) =>
+```
