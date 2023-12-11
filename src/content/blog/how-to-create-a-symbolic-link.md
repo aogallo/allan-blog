@@ -11,7 +11,7 @@ tags:
 description: You will learn how to create a symbolic link in macOS
 ---
 
-I will show you how to create a symbolic link in macOS in the terminal, to show that I will use my neovim configuration in [my dotfiles repository](https://github.com/aogallo/dotfiles.git)
+I will show you how to create a symbolic link in macOS in the terminal.
 
 `ln` creates a new directory entry (linked file) with the same modes as the original.
 
