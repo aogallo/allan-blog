@@ -3,7 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-I'm a developer
+I'm a Software Engineer 
 
 ## Tech Stack
 
