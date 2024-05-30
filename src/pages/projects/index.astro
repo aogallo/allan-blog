@@ -17,12 +17,12 @@ console.log(projects);
 
 <Layout title={`Projects | ${SITE.title}`}>
   <Header activeNav="projects" />
-  <Main pageTitle="Projects">
+  <Main>
     <ul>
       {projects?.map(project => <CardProject frontmatter={project.data} />)}
     </ul>
   </Main>
-  <Footer noMarginTop={10 > 1} />
+  <Footer />
 </Layout>
 
 <style>
