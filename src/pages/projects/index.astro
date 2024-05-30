@@ -18,7 +18,7 @@ console.log(projects);
 <Layout title={`Projects | ${SITE.title}`}>
   <Header activeNav="projects" />
   <Main>
-    <ul>
+    <ul class="wrapper">
       {projects?.map(project => <CardProject frontmatter={project.data} />)}
     </ul>
   </Main>
@@ -34,5 +34,8 @@ console.log(projects);
   }
   .disabled-svg {
     @apply group-hover:!fill-skin-base;
+  }
+  .wrapper {
+    @apply grid grid-cols-3 gap-4;
   }
 </style>

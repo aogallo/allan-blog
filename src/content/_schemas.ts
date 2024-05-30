@@ -17,6 +17,7 @@ export const blogSchema = z
 export const projectSchema = z.object({
   title: z.string(),
   description: z.string(),
+  image: z.string().optional(),
 });
 
 export type BlogFrontmatter = z.infer<typeof blogSchema>;
