@@ -14,4 +14,11 @@ export const blogSchema = z
   })
   .strict();
 
+export const projectSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+});
+
 export type BlogFrontmatter = z.infer<typeof blogSchema>;
+
+export type ProjectFrontmatter = z.infer<typeof projectSchema>;

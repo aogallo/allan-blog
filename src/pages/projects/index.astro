@@ -1,0 +1,38 @@
+---
+import { SITE } from "@config";
+
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Main from "@layouts/Main.astro";
+
+import CardProject from "@components/CardProject";
+
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+
+console.log(projects);
+---
+
+<Layout title={`Projects | ${SITE.title}`}>
+  <Header activeNav="projects" />
+  <Main pageTitle="Projects">
+    <ul>
+      {projects?.map(project => <CardProject frontmatter={project.data} />)}
+    </ul>
+  </Main>
+  <Footer noMarginTop={10 > 1} />
+</Layout>
+
+<style>
+  .pagination-wrapper {
+    @apply mb-8 mt-auto flex justify-center;
+  }
+  .disabled {
+    @apply pointer-events-none select-none opacity-50 hover:text-skin-base group-hover:fill-skin-base;
+  }
+  .disabled-svg {
+    @apply group-hover:!fill-skin-base;
+  }
+</style>
