@@ -2,7 +2,7 @@
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 
 export interface Props {
-  pageTitle: string;
+  pageTitle?: string;
   pageDesc?: string;
 }
 
@@ -11,7 +11,7 @@ const { pageTitle, pageDesc } = Astro.props;
 
 <Breadcrumbs />
 <main id="main-content">
-  <h1>{pageTitle}</h1>
+  {pageTitle && <h1>{pageTitle}</h1>}
   <p>{pageDesc}</p>
   <slot />
 </main>
