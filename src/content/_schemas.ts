@@ -17,7 +17,12 @@ export const blogSchema = z
 export const projectSchema = z.object({
   title: z.string(),
   description: z.string(),
-  image: z.string().optional(),
+  image: z
+    .object({
+      url: z.string(),
+      alt: z.string(),
+    })
+    .optional(),
   liveLink: z.string(),
   github: z.string(),
 });

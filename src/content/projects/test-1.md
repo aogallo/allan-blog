@@ -1,7 +1,9 @@
 ---
 title: Test 1
 description: Test 1 decription
-image: ("../assets/test.jpg")
+image: 
+    url: "../../../public/test.jpg"
+    alt: "Test image"
 liveLink: ""
 github: ""
 ---

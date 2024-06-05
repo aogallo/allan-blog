@@ -1,12 +1,13 @@
 import type { ProjectFrontmatter } from "@content/_schemas";
-import test from "@assets/test.jpg";
 
 export interface CardProjectProps {
   frontmatter: ProjectFrontmatter;
 }
 
 export default function CardProject({ frontmatter }: CardProjectProps) {
-  const { title, description, github, liveLink } = frontmatter;
+  const { title, image, description, github, liveLink } = frontmatter;
+
+  console.log(image);
 
   const target = "_blank";
   // const href = "https://github.com/aogallo";
@@ -16,7 +17,7 @@ export default function CardProject({ frontmatter }: CardProjectProps) {
 
   return (
     <li className="rounded-md border-2 border-skin-accent p-2">
-      <img src={test} alt="test" />
+      {image && <img src={image.url} alt={image.alt} />}
       <h2>{title}</h2>
       <p>{description}</p>
       <div className="flex flex-row gap-2">
