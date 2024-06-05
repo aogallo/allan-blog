@@ -7,20 +7,23 @@ export interface CardProjectProps {
 export default function CardProject({ frontmatter }: CardProjectProps) {
   const { title, image, description, github, liveLink } = frontmatter;
 
-  console.log(image);
-
   const target = "_blank";
-  // const href = "https://github.com/aogallo";
-  // const className = "link-button";
-  // const titleLink = "Allan on Github";
   const disabled = false;
 
   return (
     <li className="rounded-md border-2 border-skin-accent p-2">
-      {image && <img src={image.url} alt={image.alt} />}
-      <h2>{title}</h2>
+      <div className="">
+        {image && (
+          <img
+            className="h-48 w-96 object-contain"
+            src={image.url}
+            alt={image.alt}
+          />
+        )}
+      </div>
+      <h2 className="my-2">{title}</h2>
       <p>{description}</p>
-      <div className="flex flex-row gap-2">
+      <div className="mt-3 flex flex-row gap-2">
         <a
           target={target}
           href={disabled ? "#" : github}

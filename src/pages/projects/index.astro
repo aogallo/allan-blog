@@ -10,7 +10,9 @@ import CardProject from "@components/CardProject";
 
 import { getCollection } from "astro:content";
 
-const projects = await getCollection("projects");
+// const postImportResult = await getCollection("blog", ({ data }) => !data.draft);
+const projects = await getCollection("projects", ({ data }) => !data.draft);
+console.log(projects);
 ---
 
 <Layout title={`Projects | ${SITE.title}`}>
