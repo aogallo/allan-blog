@@ -11,7 +11,7 @@ export default function CardProject({ frontmatter }: CardProjectProps) {
   const disabled = false;
 
   return (
-    <li className="rounded-md border-2 border-skin-accent p-2">
+    <li className="rounded-md border-2 border-skin-accent p-2 sm:flex-col">
       <div className="">
         {image && (
           <img
@@ -28,7 +28,7 @@ export default function CardProject({ frontmatter }: CardProjectProps) {
           target={target}
           href={disabled ? "#" : github}
           // tabindex={disabled ? "-1" : "0"}
-          className="group inline-block hover:text-skin-accent"
+          className="group inline-block hover:text-skin-accent sm:text-skin-accent"
           // aria-label={ariaLabel}
           title={title}
           // aria-disabled={disabled}
