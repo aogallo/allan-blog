@@ -13,9 +13,7 @@ import { getCollection } from "astro:content";
 // const postImportResult = await getCollection("blog", ({ data }) => !data.draft);
 const isDev = process.env.NODE_ENV;
 
-const projects = await getCollection("projects", ({ data }) =>
-  isDev ? data : !data.draft
-);
+const projects = await getCollection("projects", ({ data }) => !data.draft);
 ---
 
 <Layout title={`Projects | ${SITE.title}`}>
