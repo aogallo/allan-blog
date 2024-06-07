@@ -11,7 +11,7 @@ export default function CardProject({ frontmatter }: CardProjectProps) {
   const disabled = false;
 
   return (
-    <li className="rounded-md border-2 border-skin-accent p-2 sm:flex-col">
+    <li className="rounded-md border-2 border-skin-accent p-2 ">
       <div className="">
         {image && (
           <img

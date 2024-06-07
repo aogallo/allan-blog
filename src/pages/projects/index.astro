@@ -35,6 +35,6 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
     @apply group-hover:!fill-skin-base;
   }
   .wrapper {
-    @apply grid grid-cols-3 gap-4;
+    @apply grid grid-cols-3 gap-4 sm:flex-row;
   }
 </style>
