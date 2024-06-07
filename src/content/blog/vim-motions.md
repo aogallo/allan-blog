@@ -39,12 +39,13 @@ description: This guide will help you to know how to move in Vim
 - va{% - delete all inside the curly braices included it
 
 ```ts
-const onSubmit = async (event) => {
-    event.preventDefault()
+const onSubmit = async event => {
+  event.preventDefault();
 
-    console.log(event.target.value)
-}
+  console.log(event.target.value);
+};
 ```
+
 ```ts
 const onSubmit = async (event) =>
 ```

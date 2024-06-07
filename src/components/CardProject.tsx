@@ -11,18 +11,18 @@ export default function CardProject({ frontmatter }: CardProjectProps) {
   const disabled = false;
 
   return (
-    <li className="rounded-md border-2 border-skin-accent p-2">
+    <li className="rounded-md border-2 border-skin-accent p-2 ">
       <div className="">
         {image && (
           <img
-            className="h-48 w-96 object-contain"
+            className="sm:h-35 sm:w-35 h-48 w-96 object-contain"
             src={image.url}
             alt={image.alt}
           />
         )}
       </div>
-      <h2 className="my-2">{title}</h2>
-      <p>{description}</p>
+      <h2 className="my-2 sm:my-1">{title}</h2>
+      <p className="sm:display-none">{description}</p>
       <div className="mt-3 flex flex-row gap-2">
         <a
           target={target}
