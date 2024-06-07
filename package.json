@@ -1,7 +1,7 @@
 {
   "name": "allan-blog",
   "version": "2.3.0",
-  "description": "Personal blog where share all thougths, own projects, and configurations such as neovim, tmux.",
+  "description": "Personal blog to share configurations such as neovim, tmux and install process of some tools.",
   "scripts": {
     "dev": "astro check --watch & astro dev",
     "start": "astro dev",
