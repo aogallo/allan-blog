@@ -1,4 +1,5 @@
 import type { ProjectFrontmatter } from "@content/_schemas";
+import Link from "./Link";
 
 export interface CardProjectProps {
   frontmatter: ProjectFrontmatter;
@@ -7,47 +8,27 @@ export interface CardProjectProps {
 export default function CardProject({ frontmatter }: CardProjectProps) {
   const { title, image, description, github, liveLink } = frontmatter;
 
-  const target = "_blank";
-  const disabled = false;
-
   return (
-    <li className="rounded-md border-2 border-skin-accent p-2 ">
-      <div className="">
-        {image && (
+    <div className="bg-white md:max-w-2xl mx-auto max-w-md overflow-hidden rounded-xl border-2 border-skin-accent shadow-md">
+      <div className="md:flex">
+        <div className="md:shrink-0">
           <img
-            className="sm:h-35 sm:w-35 h-48 w-96 object-contain"
-            src={image.url}
-            alt={image.alt}
+            className="md:h-full md:w-48 h-48 w-full object-cover"
+            src={image?.url}
+            alt={image?.alt}
           />
-        )}
+        </div>
+        <div className="p-5">
+          <div className="text-indigo-500 text-sm font-semibold uppercase tracking-wide">
+            {title}
+          </div>
+          <p className="text-slate-500 mt-2 text-sm">{description}</p>
+          <div className="mt-2 flex justify-between">
+            <Link href={github} title={title} label="Github" />
+            <Link href={liveLink} title={title} label="Live demo" />
+          </div>
+        </div>
       </div>
-      <h2 className="my-2 sm:my-1">{title}</h2>
-      <p className="sm:display-none">{description}</p>
-      <div className="mt-3 flex flex-row gap-2">
-        <a
-          target={target}
-          href={disabled ? "#" : github}
-          // tabindex={disabled ? "-1" : "0"}
-          className="group inline-block hover:text-skin-accent"
-          // aria-label={ariaLabel}
-          title={title}
-          // aria-disabled={disabled}
-        >
-          Github
-        </a>
-
-        <a
-          target={target}
-          href={disabled ? "#" : liveLink}
-          // tabindex={disabled ? "-1" : "0"}
-          className="group inline-block hover:text-skin-accent "
-          // aria-label={ariaLabel}
-          title={title}
-          // aria-disabled={disabled}
-        >
-          Live
-        </a>
-      </div>
-    </li>
+    </div>
   );
 }

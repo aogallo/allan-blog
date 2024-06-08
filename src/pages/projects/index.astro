@@ -10,10 +10,7 @@ import CardProject from "@components/CardProject";
 
 import { getCollection } from "astro:content";
 
-// const postImportResult = await getCollection("blog", ({ data }) => !data.draft);
-const isDev = process.env.NODE_ENV;
-
-const projects = await getCollection("projects", ({ data }) => !data.draft);
+const projects = await getCollection("projects", ({data})=> !data.draft );
 ---
 
 <Layout title={`Projects | ${SITE.title}`}>
@@ -37,6 +34,6 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
     @apply group-hover:!fill-skin-base;
   }
   .wrapper {
-    @apply grid grid-cols-3 gap-4;
+    @apply grid  gap-2 sm:grid-cols-3;
   }
 </style>
