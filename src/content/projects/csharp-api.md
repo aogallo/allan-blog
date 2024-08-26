@@ -1,6 +1,6 @@
 ---
 title: C# API
-description: C# API
+description: ""
 image:
   url: "/dotnet.png"
   alt: "Dot Net"
