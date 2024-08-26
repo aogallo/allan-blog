@@ -11,7 +11,7 @@ const Link = ({ disabled = false, href, title, label }: LinkProps) => {
       target="_blank"
       href={disabled ? "#" : href}
       // tabindex={disabled ? "-1" : "0"}
-      className="group inline-block hover:text-skin-accent"
+      className="group  inline-block text-sm text-skin-accent"
       // aria-label={ariaLabel}
       title={title}
       // aria-disabled={disabled}

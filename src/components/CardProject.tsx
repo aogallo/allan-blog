@@ -9,7 +9,7 @@ export default function CardProject({ frontmatter }: CardProjectProps) {
   const { title, image, description, github, liveLink } = frontmatter;
 
   return (
-    <div className="bg-white md:max-w-2xl mx-auto max-w-md overflow-hidden rounded-xl border-2 border-skin-accent shadow-md">
+    <div className="bg-white md:max-w-2xl mx-auto max-w-md overflow-hidden rounded-xl border border-skin-accent shadow-lg">
       <div className="md:flex">
         <div className="md:shrink-0">
           <img
