@@ -26,6 +26,7 @@ export const projectSchema = z.object({
   liveLink: z.string(),
   github: z.string(),
   draft: z.boolean(),
+  tags: z.array(z.string()).optional(),
 });
 
 export type BlogFrontmatter = z.infer<typeof blogSchema>;
