@@ -1,6 +1,6 @@
 ---
 title: Quiz App with React Native
-description: Quiz App
+description: Quiz App that consumes Open Trivia's Rest API
 github: "https://github.com/aogallo/quiz-app"
 draft: false
 image:
