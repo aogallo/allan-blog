@@ -7,4 +7,7 @@ image:
 liveLink: "https://todoapi-kvfw.onrender.com"
 github: "https://github.com/aogallo/TodoApi"
 draft: false
+tags:
+  - dotnet
+  - Swagger
 ---

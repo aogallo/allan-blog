@@ -6,4 +6,7 @@ draft: false
 image:
   url: quiz-app-react-native.png
   alt: Quiz app with react native
+tags:
+  - react native
+  - redux
 ---

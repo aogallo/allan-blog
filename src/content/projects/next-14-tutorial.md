@@ -7,4 +7,10 @@ image:
 liveLink: "https://nextjs-14-dashboard-tutorial-nine.vercel.app/"
 github: "https://github.com/aogallo/nextjs-14-tutorial"
 draft: false
+tags:
+  - nextjs
+  - nextjs14
+  - postgresql
+  - vercel
+  - dashboard
 ---
