@@ -23,7 +23,7 @@ export const projectSchema = z.object({
       alt: z.string(),
     })
     .optional(),
-  liveLink: z.string(),
+  liveLink: z.string().optional(),
   github: z.string(),
   draft: z.boolean(),
 });
