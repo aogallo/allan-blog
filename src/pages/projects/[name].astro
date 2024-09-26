@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import { slug } from "github-slugger";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  const pages = projects.map(project => ({
+    params: { name: slug(project.data.title) },
+    props: { project },
+  }));
+
+  return [...pages];
+}
+
+// const {name} = Astro.params
+const { project } = Astro.props;
+
+const { title } = project.data;
+
+const { Content } = await project.render();
+---
+
+<Content />
