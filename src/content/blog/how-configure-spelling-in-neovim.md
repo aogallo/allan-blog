@@ -34,6 +34,27 @@ If you are using vim script
 :setlocal spell spelllang=en_us
 ```
 
+## Keymaps
+
+To search for the next misspelled word:
+
+| Key map | Description                      |
+| ------- | -------------------------------- |
+| ]s      | Move to next misspelled word     |
+| [s      | Move to previous misspelled word |
+
+To add words to your own word lists:
+
+| Key map | Description                                 |
+| ------- | ------------------------------------------- |
+| zg      | Add word under the cursor to the dictionary |
+
+Finding suggestions for bad wrods:
+
+| Key map | Description                          |
+| ------- | ------------------------------------ |
+| z=      | Show suggest correctly spelled words |
+
 ## Resources
 
 - [Neovim spell docs](https://neovim.io/doc/user/spell.html)
