@@ -1,4 +1,4 @@
-# Allan Blog 📄
+# Allan's Blog 📄
 
 ## Personal knowledge repository
 
