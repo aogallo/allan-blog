@@ -45,9 +45,9 @@ To search for the next misspelled word:
 
 To add words to your own word lists:
 
-| Key map | Description               |
-| ------- | ------------------------- |
-| zg      | Add word under the cursor |
+| Key map | Description                                 |
+| ------- | ------------------------------------------- |
+| zg      | Add word under the cursor to the dictionary |
 
 Finding suggestions for bad wrods:
 
