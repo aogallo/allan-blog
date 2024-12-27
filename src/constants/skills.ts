@@ -1,0 +1,31 @@
+export const skills = [
+  {
+    name: "Javacript",
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+  },
+  { name: "Typescript", href: "https://www.typescriptlang.org" },
+  { name: "CSS", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { name: "styled-components", href: "https://styled-components.com" },
+  { name: "ReactJs", href: "https://react.dev" },
+  { name: "Python", href: "https://www.python.org" },
+  { name: "REST API", href: "https://aws.amazon.com/what-is/restful-api/" },
+  { name: "Graphql API", href: "https://graphql.org" },
+  { name: "SQL Server", href: "https://www.microsoft.com/en-us/sql-server" },
+  {
+    name: "PostgreSQL",
+    href: "https://www.postgresql.org",
+  },
+  { name: "MongoDB", href: "https://www.mongodb.com" },
+  { name: "DynamoDB", href: "https://aws.amazon.com/pm/dynamodb/?nc1=h_ls" },
+  { name: "AWS QLDB", href: "https://aws.amazon.com/qldb/" },
+  {
+    name: "Lambda",
+    href: "https://shorturl.at/BOqHK",
+  },
+  { name: "API Gateway", href: "https://aws.amazon.com/api-gateway/" },
+  { name: "S3", href: "" },
+  { name: "Data lakes", href: "" },
+  { name: "Apache Airflow", href: "" },
+  { name: "Docker", href: "" },
+  { name: "Jira", href: "" },
+];
