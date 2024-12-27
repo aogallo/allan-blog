@@ -20,12 +20,15 @@ export const skills = [
   { name: "AWS QLDB", href: "https://aws.amazon.com/qldb/" },
   {
     name: "Lambda",
-    href: "https://shorturl.at/BOqHK",
+    href: "https://docs.aws.amazon.com/lambda/?icmpid=docs_homepage_featuredsvcs",
   },
   { name: "API Gateway", href: "https://aws.amazon.com/api-gateway/" },
-  { name: "S3", href: "" },
-  { name: "Data lakes", href: "" },
-  { name: "Apache Airflow", href: "" },
-  { name: "Docker", href: "" },
-  { name: "Jira", href: "" },
+  {
+    name: "S3",
+    href: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
+  },
+  { name: "Data lakes", href: "https://en.wikipedia.org/wiki/Data_lake" },
+  { name: "Apache Airflow", href: "https://airflow.apache.org" },
+  { name: "Docker", href: "https://hub.docker.com" },
+  { name: "Jira", href: "https://www.atlassian.com/software/jira" },
 ];
