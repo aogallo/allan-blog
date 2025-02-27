@@ -12,7 +12,7 @@ ogImage: https://w7.pngwing.com/pngs/950/109/png-transparent-vim-computer-icons-
 description: This guide will help you to know how to move in Vim
 ---
 
-![](https://w7.pngwing.com/pngs/950/109/png-transparent-vim-computer-icons-text-editor-skk-cursor-others-angle-rectangle-triangle-thumbnail.png)
+![Neovim](https://w7.pngwing.com/pngs/950/109/png-transparent-vim-computer-icons-text-editor-skk-cursor-others-angle-rectangle-triangle-thumbnail.png)
 
 ## Table of contents
 
