@@ -354,7 +354,8 @@ For example, a simple Lambda function might involve automatically resizing uploa
 
 ### How AWS Lambda works
 
-![[Screenshot 2025-02-03 at 6.22.30 PM.png]]
+![How AWS Lambda works](../../../public/assets/lambda-workflow.png)
+Image source: AWS Skill Builder
 
 1. You upload your code to Lambda.
 2. You set your code to trigger from an event source, such as AWS services, mobile applications, or HTTP endpoints.
@@ -483,7 +484,8 @@ You will learn in more detail that several factors determine pricing, but for no
 
 ### Availability Zones
 
-![[Screenshot 2025-02-06 at 5.51.52 PM.png]]
+![Availability Zones](../../../public/assets/amazon-ec2-instances-availability-zones.png)
+Image source: AWS Skill Builder
 
 An Availability Zone is a single data center or a group of data centers within
 a Region. Availability Zones are located tens of miles apart from each other.
@@ -494,7 +496,8 @@ that multiple Availability Zones are affected.
 
 1. Amazon EC2 instance in a single Availability Zone
 
-![[Screenshot 2025-02-06 at 6.19.52 PM.png]]
+![Amazon EC2 instance in a single Availability Zone](../../../public/assets/amazon-ec2-instances-in-single-availability-zones.png)
+Image source: AWS Skill Builder
 
 Suppose that you're running an application on a single Amazon EC2 instance
 in the Northern California Region. The instance is running in the us-west-1a
@@ -502,13 +505,17 @@ Availability Zone. If us-west-1a were to fail, you would lose your instance.
 
 2. Amazon EC2 instances in multiple Availability Zones
 
-![[Screenshot 2025-02-06 at 6.20.10 PM.png]]
+![Amazon EC2 instances in multiple Availability Zones](../../../public/assets/amazon-ec2-instances-in-multiple-availability-zones.png)
+Image source: AWS Skill Builder
+
 A best practice is to run applications across at least two Availability Zones in a Region.
 In this example, you might choose to run a second Amazon EC2 instance in us-west-1b.
 
 3. Availability Zone failure
 
-![[Screenshot 2025-02-06 at 6.20.26 PM.png]]
+![Availability Zone failure](../../../public/assets/availability-zone-failure.png)
+Image source: AWS Skill Builder
+
 If us-west-1a were to fail, your application would still be running in us-west-1b.
 
 Summary
