@@ -4,7 +4,11 @@ module.exports = {
     es2022: true,
     browser: true,
   },
-  extends: ["eslint:recommended", "plugin:astro/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:astro/recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
@@ -20,4 +24,8 @@ module.exports = {
       rules: {},
     },
   ],
+  rules: {
+    "no-unused-vars": "error",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+  },
 };
