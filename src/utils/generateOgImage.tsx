@@ -3,20 +3,31 @@ import { SITE } from "@config";
 import { writeFile } from "node:fs/promises";
 import { Resvg } from "@resvg/resvg-js";
 
+const imageCache = new Map();
+
 const fetchFonts = async () => {
-  // Regular Font
-  const fontFileRegular = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
-  );
-  const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
+  try {
+    const [fontFileRegular, fontFileBold] = await Promise.all([
+      fetch(
+        "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
+      ),
+      fetch("https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"),
+    ]);
 
-  // Bold Font
-  const fontFileBold = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
-  );
-  const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
+    if (!fontFileRegular.ok || !fontFileBold.ok) {
+      throw new Error("Failed to fetch fonts");
+    }
 
-  return { fontRegular, fontBold };
+    const [fontRegular, fontBold] = await Promise.all([
+      fontFileRegular.arrayBuffer(),
+      fontFileBold.arrayBuffer(),
+    ]);
+
+    return { fontRegular, fontBold };
+  } catch (error) {
+    console.error("Error fetching fonts:", error);
+    throw error;
+  }
 };
 
 const { fontRegular, fontBold } = await fetchFonts();
@@ -136,7 +147,11 @@ const options: SatoriOptions = {
 };
 
 const generateOgImage = async (mytext = SITE.title) => {
+  if (imageCache.has(mytext)) {
+    return imageCache.get(mytext);
+  }
   const svg = await satori(ogImage(mytext), options);
+  imageCache.set(mytext, svg);
 
   // render png in production mode
   if (import.meta.env.MODE === "production") {
