@@ -8,12 +8,14 @@ draft: false
 tags:
   - aws
   - cloud practitioner
-description: z.string(),
+description: Resume
 ---
 
 # Cloud practitioner
 
-# Module 1: Cloud computing
+# Module 1: Introduction to Amazon Web Services
+
+## Cloud computing
 
 In this module, you will learn how to:
 
@@ -445,7 +447,9 @@ AWS Lambda is a service that lets you run code without provisioning or managing 
 Amazon Simple Queue Service (Amazon SQS) is a service that enables you to send, store, and receive messages between software components through a queue.
 Amazon Simple Notification Service (Amazon SNS) is a publish/subscribe service. Using Amazon SNS topics, a publisher publishes messages to subscribers.
 
-# Module 3 Introduction
+# Module 3 Global Infrastructure and reliability
+
+## Introduction
 
 In this module, you will learn how to:
 
@@ -464,7 +468,9 @@ This is similar to how the AWS global infrastructure works.
 
 When determining the right Region for your services, data, and applications, consider the following four business factors.
 
-1. Compliance with data governance and legal requirements: Depending on your company and location, you might need to run your data out of specific areas. For example, if your company requires all of its data reside within the boundaries of the UK, you would choose the London Region.
+1. Compliance with data governance and legal requirements: Depending on your company and location,
+   you might need to run your data out of specific areas. For example, if your company requires all of its data
+   reside within the boundaries of the UK, you would choose the London Region.
 
 Not all companies have location-specific data regulations, so you might need to focus more on the other three factors.
 
@@ -480,7 +486,7 @@ Suppose that your developers want to build an application that uses Amazon Brake
 
 4. **Pricing**: Suppose that you are considering running applications in both the United States and Brazil. The way Brazil's tax structure is set up, it might cost 50% more to run the same workload out of the São Paulo Region compared to the Oregon Region.
 
-You will learn in more detail that several factors determine pricing, but for now know that the cost fo services can vary from Region to Region.
+You will learn in more detail that several factors determine pricing, but for now know that the cost of services can vary from Region to Region.
 
 ### Availability Zones
 
@@ -528,4 +534,107 @@ Zones is an important part of building a resilient and highly available architec
 An edge location is a site that Amazon CloudFront uses to store cached copies
 of you content closer to your customer for faster delivery.
 
+![Edge Location](../../../public/assets/edge-location.png)
+Image source: AWS Skill Builder
 
+## How to provide AWS Resources (Lesson 18)
+
+### AWS Manage Console
+
+The AWS Manage Console is a web-based interface for accessing and managing AWS services.
+You can quickly access recently used services and search other services by name,
+keyword, or acronym. The console includes wizards and automated workflows that can
+simplify the process of completing tasks.
+
+### AWS Command Line Interface
+
+To save time when making API requests, you can use the AWS Command Line Interface (AWS CLI).
+AWS CLI enables you to control multiple AWS services directly from the command line within one tool.
+
+By using AWS CLI, you can automate the actions that your services and applications perform
+through scripts. For example, you can use commands to launch an Amazon EC2 instance,
+connect an Amazon EC2 instance to a specific Auto Scaling group, and more.
+
+### Software Development Kits
+
+Another option for accessing and managing AWS services is the software development kits
+(SDKs). SDKs make it easier for you to use AWS services through an API designed for your
+programming language or platform.
+
+### AWS Elastic Beanstalk
+
+With AWS Elastic Beanstalk, you provide code and configuration settings, and Elastic Beanstalk
+deploys the resources necessary to perform the following tasks:
+
+- Adjust capacity
+- Load balancing
+- Automatic scaling
+- Application health monitoring
+
+### AWS CloudFormation
+
+With AWS CloudFormation, you can treat your infrastructure as code. This mean that you can
+build an environment by writing lines of code instead of using the AWS Management Console to
+individually provision resources.
+
+## Module 3 Summary (Lesson 19)
+
+In Module 3, you learned about the following concepts:
+
+- [AWS Regions and Availability Zones](#availability-zones)
+- [Edge locations and Amazon CloudFront](#edge-locations)
+- [The AWS Management Console, AWS CLI, and SKDs](#how-to-provide-aws-resources-lesson-18)
+- [AWS Elastic Beanstalk](#aws-elastic-beanstalk)
+- [AWS CloudFormation](#aws-cloudformation)
+
+### Additional resources
+
+[Global Infrastructure](https://aws.amazon.com/about-aws/global-infrastructure/)
+[Interactive map of the AWS Global Infrastructure](https://www.infrastructure.aws/)
+[Regions and Availability Zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az)
+[AWS Networking and Content Delivery Blog](https://aws.amazon.com/blogs/networking-and-content-delivery/)
+[Tools to Build on AWS](https://aws.amazon.com/tools/)
+[AWS Customer Stories: Content Delivery](https://aws.amazon.com/solutions/case-studies/?customer-references-cards.sort-by=item.additionalFields.publishedDate&customer-references-cards.sort-order=desc&awsf.customer-references-location=*all&awsf.customer-references-segment=*all&awsf.customer-references-product=product%23vpc%7Cproduct%23api-gateway%7Cproduct%23cloudfront%7Cproduct%23route53%7Cproduct%23directconnect%7Cproduct%23elb&awsf.customer-references-category=category%23content-delivery)
+
+## Module 3 Quiz
+
+Which statement is TRUE for the AWS global infrastructure?
+A Region consists of three or more Availability Zones
+
+Which factors should be considered when selection a Region?
+
+- Compliance with data governance and legal requirements
+- Proximity to your customers
+
+Which statement best describes Amazon CloudFront?
+
+- A global content delivery service
+
+Which site does Amazon CloudFront use to cache copies of content for faster delivery to users at any location?
+
+- Edge location
+
+Which action can you perform with AWS Outposts?
+
+The correct response option is Extend AWS infrastructure and services to different locations, including your on-premises data center.
+
+The other response options are incorrect because:
+The AWS Command Line Interface (AWS CLI) is used to automate actions for AWS services and applications through scripts.
+The AWS Management Console includes wizards and workflows that you can use to complete tasks in AWS services.
+Software development kits (SDKs) enable you to develop AWS applications in supported programming languages.
+Learn more: [AWS Outposts](https://aws.amazon.com/outposts/)
+
+# Module 4 Networking (Lesson 21)
+
+## Introduction
+
+In this module, you will learn how to:
+
+- Describe the basic concepts of networking.
+- Describe the difference between public and private networking resources.
+- Explain a virtual private gateway using a real life scenario.
+- Explain a virtual private network (VPN) using a real life scenario.
+- Describe the benefit of AWS Direct Connect.
+- Describe the benefit of hybrid deployments.
+- Describe the layers of security used in an IT strategy.
+- Describe the services customers use to interact with the AWS global network.
