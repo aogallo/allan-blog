@@ -10,30 +10,99 @@ import CardProject from "@components/CardProject";
 
 import { getCollection } from "astro:content";
 
-const projects = await getCollection("projects", ({data})=> !data.draft );
+const projects = await getCollection("projects", ({ data }) => !data.draft);
+
+// Ordenar por pubDatetime (más reciente primero), si no tiene fecha va al final
+projects.sort((a, b) => {
+  const dateA = a.data.pubDatetime?.getTime() ?? 0;
+  const dateB = b.data.pubDatetime?.getTime() ?? 0;
+  return dateB - dateA;
+});
+
+// Obtener todos los tags únicos
+const allTags = [...new Set(projects.flatMap((project) => project.data.tags || []))].sort();
 ---
 
 <Layout title={`Projects | ${SITE.title}`}>
   <Header activeNav="projects" />
   <Main>
-    <ul class="wrapper">
-      {projects?.map(project => <CardProject frontmatter={project.data} />)}
+    <!-- Tag Filters -->
+    <div class="mb-8 flex flex-wrap gap-2">
+      <button
+        class="filter-btn active rounded-full border border-skin-line bg-skin-accent px-4 py-2 text-sm font-medium text-skin-inverted transition-colors hover:border-skin-accent"
+        data-tag="all"
+      >
+        All
+      </button>
+      {allTags.map((tag) => (
+        <button
+          class="filter-btn rounded-full border border-skin-line px-4 py-2 text-sm font-medium text-skin-base transition-colors hover:border-skin-accent"
+          data-tag={tag}
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+
+    <!-- Projects Grid -->
+    <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
+      {projects.map((project) => (
+        <li class="project-item" data-tags={JSON.stringify(project.data.tags || [])}>
+          <CardProject
+            frontmatter={project.data}
+            slug={project.id.replace(/\.md$/, "")}
+          />
+        </li>
+      ))}
     </ul>
   </Main>
   <Footer />
 </Layout>
 
+<script>
+  // Client-side filtering
+  const buttons = document.querySelectorAll(".filter-btn");
+  const items = document.querySelectorAll(".project-item");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.getAttribute("data-tag");
+
+      // Update active button
+      buttons.forEach((b) => {
+        b.classList.remove("bg-skin-accent", "text-skin-inverted");
+        b.classList.add("text-skin-base");
+      });
+      btn.classList.add("bg-skin-accent", "text-skin-inverted");
+      btn.classList.remove("text-skin-base");
+
+      // Filter projects
+      items.forEach((item) => {
+        const itemTags = JSON.parse(item.getAttribute("data-tags") || "[]");
+
+        if (tag === "all" || itemTags.includes(tag)) {
+          (item as HTMLElement).style.display = "block";
+        } else {
+          (item as HTMLElement).style.display = "none";
+        }
+      });
+    });
+  });
+</script>
+
 <style>
-  .pagination-wrapper {
-    @apply mb-8 mt-auto flex justify-center;
+  .project-item {
+    animation: fadeIn 0.3s ease-out;
   }
-  .disabled {
-    @apply pointer-events-none select-none opacity-50 hover:text-skin-base group-hover:fill-skin-base;
-  }
-  .disabled-svg {
-    @apply group-hover:!fill-skin-base;
-  }
-  .wrapper {
-    @apply grid  gap-2 sm:grid-cols-3;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
