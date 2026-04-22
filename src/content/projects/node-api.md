@@ -1,12 +1,18 @@
 ---
-title: Node API
-description: API Test decription
+title: Node.js REST API
+description: API REST completa con Express, integración MongoDB, middleware de autenticación y cobertura de tests.
 image:
   url: "/test.jpg"
-  alt: "Test image"
+  alt: "Node.js API project"
+github: "https://github.com/aogallo/node-api"
 liveLink: ""
-github: ""
-draft: true
+draft: false
+pubDatetime: 2025-02-28
+tags:
+  - Node.js
+  - Express
+  - MongoDB
+  - JWT
 ---
 
-# Test
+API REST completa con Express, integración MongoDB, middleware de autenticación y cobertura de tests.

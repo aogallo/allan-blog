@@ -1,12 +1,18 @@
 ---
 title: Go API
-description: GO APITest decription
+description: API REST minimalista construida con Go. Incluye autenticación JWT, operaciones CRUD y deployment con Docker.
 image:
-  url: "../../../public/assets/dev.svg"
-  alt: "Test image"
-liveLink: ""
+  url: "/assets/dev.svg"
+  alt: "Go API project"
 github: "https://github.com/aogallo/go-server"
-draft: true
+liveLink: ""
+draft: false
+pubDatetime: 2025-05-20
+tags:
+  - Go
+  - REST API
+  - Docker
+  - JWT
 ---
 
-# Test
+API REST minimalista con autenticación JWT, operaciones CRUD y deployment con Docker.
