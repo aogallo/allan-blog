@@ -1,12 +1,17 @@
 ---
 title: Quiz App with React Native
-description: Quiz App that consumes Open Trivia's Rest API
-github: "https://github.com/aogallo/quiz-app"
-draft: false
+description: Quiz App que consume Open Trivia's Rest API. Implementa gestión de estado con Redux, múltiples categorías y seguimiento de puntuación.
 image:
   url: /quiz-app-react-native.png
   alt: Quiz app with react native
+github: "https://github.com/aogallo/quiz-app"
+liveLink: ""
+draft: false
+pubDatetime: 2025-11-15
 tags:
-  - react native
-  - redux
+  - React Native
+  - Redux
+  - TypeScript
 ---
+
+Quiz App que consume Open Trivia's Rest API con múltiples categorías y seguimiento de puntuación.

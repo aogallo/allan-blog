@@ -17,6 +17,7 @@ export const blogSchema = z
 export const projectSchema = z.object({
   title: z.string(),
   description: z.string(),
+  pubDatetime: z.date().optional(),
   image: z
     .object({
       url: z.string(),
