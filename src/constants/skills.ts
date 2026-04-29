@@ -1,6 +1,6 @@
 export const skills = [
   {
-    name: "Javacript",
+    name: "JavaScript",
     href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
   },
   { name: "Typescript", href: "https://www.typescriptlang.org" },
