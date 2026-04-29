@@ -1,6 +1,9 @@
 ---
 title: Real Estate Search with LLM
-description: Plataforma full stack para búsqueda inmobiliaria usando lenguaje natural. Integra Groq (LLM cloud) para traducir consultas en texto a filtros SQL sobre PostgreSQL.
+description: Full stack real estate search platform using natural language. Integrates Groq (cloud LLM) to translate text queries into SQL filters over PostgreSQL.
+image:
+  url: /assets/real-estate-search.png
+  alt: Real Estate Search with LLM interface
 github: "https://github.com/aogallo/real_estate_seach"
 liveLink: "https://real-estate-seach.vercel.app/"
 draft: false
@@ -14,21 +17,22 @@ tags:
   - TypeScript
   - Docker
   - SQLAlchemy
+  - Alembic
 ---
 
-Plataforma de búsqueda inmobiliaria que permite buscar propiedades utilizando lenguaje natural como "Muéstrame casas de 3 habitaciones en Guatemala City".
+Real estate search platform that allows searching properties using natural language like "Show me 3-bedroom houses in Guatemala City".
 
-## Stack Tecnológico
+## Tech Stack
 
 - **Frontend**: ReactJS + Vite + Axios
 - **Backend**: FastAPI + SQLAlchemy
-- **Base de Datos**: PostgreSQL con migraciones Alembic
-- **IA**: Groq (LLM cloud)
+- **Database**: PostgreSQL with Alembic migrations
+- **AI**: Groq (cloud LLM)
 
-## Arquitectura
+## Architecture
 
 ```
 API → Service → Repository → Database
 ```
 
-El backend expone endpoints REST donde el servicio se encarga de la lógica de negocio e integración con Groq para interpretar lenguaje natural.
+The backend exposes REST endpoints where the service handles business logic and integration with Groq to interpret natural language.

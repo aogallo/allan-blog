@@ -1,24 +1,49 @@
 # Allan's Blog 📄
 
-## Personal knowledge repository
+Personal blog and portfolio built with [Astro](https://astro.build), deployed to GitHub Pages.
 
-A comprehensive collection of technical guides, configurations, and personal projects covering:
+## What's Here
 
-## Contents
+### Blog Posts
 
-- Neovim configuration: Custom setup and productivity enhancements
-- Development environment:
-  - Pyenv installation guide.
-- Personal Portfolio: About page highlighting professional journey
+Technical guides and tutorials on:
 
-## Purpose
+- **Neovim**: Configuration, plugins, motions, spell checking
+- **Development Environment**: Terminal setup, pyenv, symbolic links
+- **AstroPaper Theming**: Color schemes, OG images, CMS integration
+- **Web Development**: Tailwind Typography, portfolio building
 
-This repository serves as a central hub for my technical knowledge, workflow, optimizations, and personal learning documentation.
+### Projects
 
-It aims to provide insights into my development process, tools, and project experiences while offering potentially useful resources for fellow developers.
+- Real Estate Search with LLM (React + FastAPI + Groq + PostgreSQL)
+- Package Tracker
+- Quiz App (React Native)
+- Go API, Node.js REST API, .NET Todo API
 
-## Key Focus Areas
+## Quick Start
 
-- Developer Tooling
-- Technical Learning Notes
-- Personal Project Documentation
+```bash
+yarn install
+yarn dev      # Development server
+yarn build    # Production build (runs jampack automatically)
+yarn format   # Format with Prettier
+```
+
+## Add Content
+
+```bash
+# New blog post
+touch src/content/blog/my-new-post.md
+
+# New project
+touch src/content/projects/my-project.md
+```
+
+See frontmatter in existing files for the required structure.
+
+## Tech Stack
+
+- **Framework**: Astro with React components
+- **Styling**: Tailwind CSS
+- **Content**: Markdown with content collections
+- **Deployment**: GitHub Pages via GitHub Actions
