@@ -1,3 +1,14 @@
+---
+title: Elevator Pitch
+description: Personal elevator pitch and interview stories using CAR and STAR frameworks.
+pubDatetime: 2026-06-11T00:00:00Z
+tags:
+  - career
+  - interview
+  - communication
+draft: true
+---
+
 # Elevator Pitch
 
 Hi, my name is Allan Gallo. I'm a Software Engineer with more than 13 years of professional
