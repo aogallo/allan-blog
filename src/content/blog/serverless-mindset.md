@@ -32,7 +32,15 @@ when comparing serverless vs. server-based design? Select all that apply.
 
 ## Event-oriented Architecture
 
-![Event-oriented architecture](/assets/event-oriented-architecture.png)
+```mermaid
+flowchart LR
+  customer["Customer action"] --> producer["Producer service"]
+  producer --> event["Domain event"]
+  event --> bus["Event bus or broker"]
+  bus --> inventory["Inventory consumer"]
+  bus --> notification["Notification consumer"]
+  bus --> analytics["Analytics consumer"]
+```
 
 When you are designing your architecture, don't focus on this question: "What's the data that I'm storing and what operations do I need to perform against that?" Instead, ask yourself this: "What are the events that should trigger an action in my system?"
 

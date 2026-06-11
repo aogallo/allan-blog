@@ -1,3 +1,14 @@
+---
+title: Amazon API Gateway for Serverless Applications
+description: Notes on Amazon API Gateway features, endpoint types, WebSocket APIs, REST APIs, deployments, and authorization patterns for serverless applications.
+pubDatetime: 2026-06-11T00:00:00Z
+tags:
+  - aws
+  - serverless
+  - api gateway
+draft: true
+---
+
 # Amazon API Gateway for Serverless Applications
 
 ## Introduction to API Gateway
@@ -94,7 +105,16 @@ for your APIs, but provide you the ability to track usage for specific users or 
 This architecture provides an example overview of the concepts and features you can use
 with API Gateway.
 
-![Amazon API Gateway architecture](/assets/amazon-api-gateway-architecture.png)
+```mermaid
+flowchart LR
+  clients["Application clients"] --> edge["Optional CloudFront edge"]
+  edge --> gateway["Amazon API Gateway"]
+  gateway --> cache["API cache"]
+  gateway --> lambda["Lambda functions"]
+  gateway --> http["HTTP services"]
+  gateway --> aws["AWS service integrations"]
+  gateway --> logs["CloudWatch logs and metrics"]
+```
 
 1. **Application clients** - There are several different types of application client that can use API Gateway as a front door.
 2. **HTTPS suppot** - API Gateway has full support for HTTPS so that you can do encryption in transit for all of the API calls to your application
@@ -117,7 +137,16 @@ REST APIs offer API proxy functionality and API management features in a single 
 REST APIs also offer API management features such as usage plans, API keys, publishing, and
 monetizing APIs.
 
-![REST API](/assets/rest-api.png)
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as REST API
+  participant Backend
+  Client->>API: HTTP method and resource path
+  API->>Backend: Forward validated request
+  Backend-->>API: Response payload
+  API-->>Client: Stateless HTTP response
+```
 
 #### HTTP API
 
@@ -131,7 +160,14 @@ For example you can create an HTTP API taht integrates with a Lambda function on
 backend. When a client calls your API, API Gateway sends the request to the Lambda function
 and returns the function's response to the client
 
-![HTTP API](/assets/http-api.png)
+```mermaid
+flowchart LR
+  client["Client"] --> api["HTTP API"]
+  api --> lambda["Lambda integration"]
+  api --> backend["HTTP backend"]
+  lambda --> response["Low-latency response"]
+  backend --> response
+```
 
 #### WEBSOCKET API
 
@@ -145,7 +181,17 @@ real-time message communication. With WebSocket APIs in API Gateway, you can def
 integrations with Lambda functions, Amazon Kinesis, or any HTTP endpoint to be invoked when
 messages are received from the connected clients
 
-![WebSocket API](/assets/websocket-api.png)
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as WebSocket API
+  participant Backend
+  Client->>API: Connect
+  API->>Backend: $connect route
+  Client->>API: Send message
+  API->>Backend: Route by message content
+  Backend-->>Client: Push callback message
+```
 
 ### Choosing between RESTful APIs and WebSocket APIs
 
@@ -359,7 +405,11 @@ within the same Region)
 The regional endpoint provides you with the flexibility to deploy your own CloudFront
 distribution or content delivery network (CDN)
 
-![Regional endpoint](/assets/regional-endpoint.png)
+```mermaid
+flowchart LR
+  caller["Client in same Region"] --> api["Regional API endpoint"]
+  api --> backend["Regional backend"]
+```
 
 #### Edge-optimized endpoint
 
@@ -368,7 +418,12 @@ anywhere on the internet. If you choose an edge-optimized endpoint, API Gateway
 will automatically configure a fully managed CloudFront distribution to provide
 lower latency access to your API.
 
-![Edge-optimized endpoint](/assets/edge-optimized-endpoint.png)
+```mermaid
+flowchart LR
+  user["Global client"] --> edge["CloudFront edge location"]
+  edge --> api["Edge-optimized API endpoint"]
+  api --> backend["Regional backend"]
+```
 
 #### Private endpoint
 
@@ -380,7 +435,12 @@ private cloud (VPC) that you control
 This endpoint type is designed for applications that have very secure workloads, such as
 healthcare or financial data that cannot be exposed publicly on the internet. There are no data transfer-out charges for private APIs. However, AWS PrivateLink charges apply when using private APIs in API Gateway.
 
-![Private endpoint](/assets/private-endpoint.png)
+```mermaid
+flowchart LR
+  app["Private VPC client"] --> vpce["Interface VPC endpoint"]
+  vpce --> api["Private API Gateway endpoint"]
+  api --> backend["Private backend"]
+```
 
 ### API Gateway optical cache
 
@@ -567,7 +627,14 @@ Consider you want to add a new GET method to a petStore API with a **/store/prod
 resource without impacting clients. To do this, you can create a canary that sends 10 percent of traffic to
 the canary with the new method.
 
-![Canary deployments](/assets/canary-deployments.png)
+```mermaid
+flowchart LR
+  clients["API clients"] --> stage["Production stage"]
+  stage --> stable["Stable deployment 90 percent"]
+  stage --> canary["Canary deployment 10 percent"]
+  stable --> backend1["Existing integration"]
+  canary --> backend2["New integration"]
+```
 
 ### Using AWS SAM templates
 
@@ -619,7 +686,17 @@ Gateway endpoints:
 
 #### Authorizing with IAM
 
-![IAM authorizer](/assets/iam-authorizer.png)
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Gateway
+  participant IAM
+  participant Backend
+  Client->>API: Signed request with SigV4
+  API->>IAM: Validate signature and permissions
+  IAM-->>API: Allow or deny
+  API->>Backend: Invoke integration when allowed
+```
 
 1. When you turn on IAM authorization, all request are required to be signed using
    the AWS Version 4 signing process
@@ -634,7 +711,17 @@ authentication, your requestor must have AWS credentials
 
 #### Lambda Authorizers
 
-![Lambda authorizers](/assets/lambda-authorizers.png)
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Gateway
+  participant Auth as Lambda authorizer
+  participant Backend
+  Client->>API: Request with token or identity data
+  API->>Auth: Invoke authorizer
+  Auth-->>API: IAM policy decision
+  API->>Backend: Continue only when allowed
+```
 
 1. A Lambda Authorizer is a Lambda function that you can write to perform any custom
    authorization that you need. There are two types of Lambda Authorizers: Token and Request
@@ -654,7 +741,15 @@ For token-type Lambda Authorizers, API Gateway passes the source token to the La
 function as a JSON input. Based on the value of this token, your Lambda function will
 determine whether to allow the request
 
-![Token type Lambda authorizer](/assets/token-type-lambda-authorizer.png)
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Gateway
+  participant Auth as Token authorizer
+  Client->>API: Authorization header token
+  API->>Auth: JSON event with source token
+  Auth-->>API: Allow or deny policy
+```
 
 1. API Gateway passes the source token to the Lambda function as a JSON input. Based on the
    value of this token, your Lambda function will determine whether to allow the request.
@@ -671,7 +766,15 @@ In this case, the client receives a 403 error.
 
 ##### Lambda Authorizer request types
 
-![Request type Lambda authorizer](/assets/request-type-lambda-authorizer.png)
+```mermaid
+sequenceDiagram
+  participant Client
+  participant API as API Gateway
+  participant Auth as Request authorizer
+  Client->>API: Headers, query string, and body
+  API->>Auth: JSON event with request context
+  Auth-->>API: Allow, deny, or unauthorized
+```
 
 1. With request-type authorizers, you can include additional payload in the JSON
    input to your Lambda function. So if you want to make authorizations that are based
@@ -683,7 +786,18 @@ In this case, the client receives a 403 error.
 
 ### Cognito Authorizers
 
-![Cognito authorizer](/assets/cognito-authorizer.png)
+```mermaid
+sequenceDiagram
+  participant User
+  participant Cognito as Cognito user pool
+  participant API as API Gateway
+  participant Backend
+  User->>Cognito: Sign in
+  Cognito-->>User: JWT token
+  User->>API: Request with JWT
+  API->>API: Validate token and scopes
+  API->>Backend: Invoke integration when valid
+```
 
 1. Cognito user pools provide a set of APIs that you can integrate into your
    application to provide authentication. User pools are intended for mobile or web

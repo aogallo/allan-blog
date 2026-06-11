@@ -1,3 +1,14 @@
+---
+title: AWS Lambda Foundations
+description: Notes on AWS Lambda concepts, invocation models, execution environments, permissions, function design, deployment, testing, and scaling.
+pubDatetime: 2026-06-11T00:00:00Z
+tags:
+  - aws
+  - serverless
+  - lambda
+draft: true
+---
+
 # AWS Lambda foundations
 
 ## Introduction
@@ -119,7 +130,15 @@ generate events and act as an event source for lambda. Lambda runs custom code
 (functions) in response to events. Lambda functions are designed to process
 these events and, once invoked, may initiate other actions or subsequent events
 
-![Producer routes consumers](/assets/producer-routes-cosumers.png)
+```mermaid
+flowchart LR
+  mobile["Mobile app"] --> router["Event router"]
+  web["Retail website"] --> router
+  pos["Point-of-sale terminal"] --> router
+  router --> warehouse["Warehouse system"]
+  router --> finance["Financial system"]
+  router --> support["Customer service"]
+```
 
 ### 1 Events and event producers
 
@@ -205,7 +224,14 @@ notification. When the resource changes and event is initiated, Lambda will run
 your function and manage the compute resources as needed to keep up with incoming
 requests.
 
-![AWS Lambda function A](/assets/aws-lambda-function-a.png)
+```mermaid
+flowchart TB
+  trigger["Event source"] --> lambda["Lambda function"]
+  role["Execution role"] --> lambda
+  code["Function code"] --> lambda
+  config["Memory, timeout, concurrency"] --> lambda
+  lambda --> service["AWS service or application backend"]
+```
 
 ### 1. Access permissions
 
@@ -351,7 +377,14 @@ Lambda invokes your function in an execution environment, which is a secure and
 isolated environment. The execution environment manages the resources required to
 run your function. The execution extension associated with your function
 
-![Execution environment lifecycle](/assets/execution-environment-lifecycle.png)
+```mermaid
+stateDiagram-v2
+  [*] --> Init
+  Init --> Invoke
+  Invoke --> Invoke: Reuse warm environment
+  Invoke --> Shutdown: Idle or service cleanup
+  Shutdown --> [*]
+```
 
 When you create your Lambda function, you specify configuration information, such as
 the amount of available memory and the maximum invocation time allowed for your
@@ -363,7 +396,12 @@ are shared between the function and the extensions
 
 ### Init phase
 
-![Init phase](/assets/init-phase.png)
+```mermaid
+flowchart LR
+  extension["Extension init"] --> runtime["Runtime init"]
+  runtime --> function["Function init"]
+  function --> ready["Ready to invoke"]
+```
 
 In this phase, Lambda creates or unfreezes an execution environment with the
 configured resources, downloads the code for the function and all layers,
@@ -384,7 +422,16 @@ tasks before the function code runs
 
 ### Invoke phase
 
-![Invoke phase](/assets/invoke-phase.png)
+```mermaid
+sequenceDiagram
+  participant Lambda
+  participant Runtime
+  participant Handler
+  Lambda->>Runtime: Invoke with event payload
+  Runtime->>Handler: Run handler code
+  Handler-->>Runtime: Return response
+  Runtime-->>Lambda: Prepare for next invoke
+```
 
 In this phase, Lambda invokes the function handler after the init phase has
 completed and the environment is ready to process events. The runtime runs the
@@ -393,7 +440,16 @@ runtime prepares to handle the next invocation.
 
 ### Shutdown phase
 
-![Shutdown phase](/assets/shutdown-phase.png)
+```mermaid
+sequenceDiagram
+  participant Lambda
+  participant Extension
+  participant Runtime
+  Lambda->>Extension: Shutdown event
+  Lambda->>Runtime: Shutdown event
+  Extension-->>Lambda: Cleanup complete
+  Runtime-->>Lambda: Process terminated
+```
 
 If no invocations occur for a period of time, the execution environment is
 frozen and eventually shut down by the Lambda service. The shutdown phase
@@ -403,7 +459,7 @@ cleaned up.
 
 # AWS Lambda execution environment
 
-![Understanding the Lambda execution environment life cycle](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html)
+[Understanding the Lambda execution environment lifecycle](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html)
 
 ## Performance optimization
 
@@ -414,7 +470,14 @@ and increase throughput
 
 ## Cold and warm starts
 
-![Cold and warm start](/assets/cold-and-warm-start.png)
+```mermaid
+flowchart LR
+  request["Incoming invoke"] --> warm{"Warm environment available?"}
+  warm -- "No" --> init["Create environment and initialize code"]
+  init --> run["Run handler"]
+  warm -- "Yes" --> run
+  run --> done["Return response"]
+```
 
 ### 1 Start container and download code
 
@@ -495,7 +558,14 @@ initialization code.
 
 ## Lambda lifecycle steps
 
-![Lambda lifecycle steps](/assets/lambda-lifecycle-steps.png)
+```mermaid
+flowchart LR
+  create["Create function"] --> configure["Configure memory, timeout, role"]
+  configure --> invoke["Invoke"]
+  invoke --> monitor["Monitor logs and metrics"]
+  monitor --> tune["Tune performance and cost"]
+  tune --> deploy["Deploy updated version"]
+```
 
 # AWS Lambda function permissions
 
@@ -512,7 +582,13 @@ policy. An IAM execution role defines the permissions that control what the func
 is allowed to do when interacting with other AWS services. Look at the full interaction
 of these two permission types and then explore each one in further detail
 
-![IAM resource policy role](/assets/iam-resource-policy-role.png)
+```mermaid
+flowchart LR
+  source["Event source"] --> policy["Resource-based policy"]
+  policy --> lambda["Lambda function"]
+  lambda --> role["Execution role"]
+  role --> service["Downstream AWS service"]
+```
 
 ### Execution role
 
@@ -535,14 +611,23 @@ that the function used during that time
 
 #### IAM policy
 
-![IAM policy](/assets/iam-policy.png)
+```mermaid
+flowchart TB
+  role["Execution role"] --> policy["IAM permissions policy"]
+  policy --> action["Allowed action: dynamodb:PutItem"]
+  action --> table["Specific DynamoDB table"]
+```
 
 This IAM policy allows the function to perform the 'Action': 'dynamodb:PutItem' action
 againt a DynamoDB table called 'test' in the us-west-2 region
 
 #### Trust policy
 
-![Trust policy](/assets/trust-policy.png)
+```mermaid
+flowchart LR
+  lambda["lambda.amazonaws.com"] --> assume["sts:AssumeRole"]
+  assume --> role["Lambda execution role"]
+```
 
 A trust policy defines what actions your role can assume. The trust policy allows
 Lambda to use the role's by giving the service principal lambda.amazon.com permission
@@ -567,11 +652,28 @@ a resource-based policy that allows production to invoke the function in Prod-2
 
 ## Distinct permissions for distinct purposes
 
-![Distinct permissions](/assets/distinct-permissions.png)
+```mermaid
+flowchart LR
+  caller["Caller or event source"] --> invokePolicy["Permission to invoke"]
+  invokePolicy --> lambda["Lambda function"]
+  lambda --> executionRole["Permission to act"]
+  executionRole --> resources["AWS resources"]
+```
 
-![Resource policy comparison](/assets/resource-policy-comparison.png)
+```mermaid
+flowchart TB
+  resource["Resource-based policy"] --> question1["Who can invoke this function?"]
+  execution["Execution role"] --> question2["What can this function access?"]
+```
 
-![Resource policy execution role](/assets/resource-policy-execution-role.png)
+```mermaid
+sequenceDiagram
+  participant S3
+  participant Lambda
+  participant DynamoDB
+  S3->>Lambda: Invoke allowed by resource policy
+  Lambda->>DynamoDB: Write allowed by execution role
+```
 
 ## Example resource policy
 
@@ -678,7 +780,12 @@ no information about state should be saved within the context of the function it
 
 ### Separate business logic
 
-![Separate business logic](/assets/separate-business-logic.png)
+```mermaid
+flowchart LR
+  handler["Handler: parse event and response"] --> controller["Controller: request orchestration"]
+  controller --> service["Service: business rules"]
+  service --> repository["Repository or external adapter"]
+```
 
 Separate your core business logic from the handler event. As illustrated in the graphic,
 function configuration and Lambda-specific code are part of the Handler,
@@ -687,7 +794,12 @@ you can target unit-tests on the business logic without worrying about the confi
 
 ### Write modular functions
 
-![Write modular functions](/assets/write-modular-functions.png)
+```mermaid
+flowchart TB
+  upload["File uploaded"] --> compress["Compress file function"]
+  upload --> thumbnail["Create thumbnail function"]
+  upload --> index["Index metadata function"]
+```
 
 Module functions will reduce the amount of time that it takes for your deployment
 package to be downloaded and unpacked before invocation. As illustrated in
@@ -879,7 +991,12 @@ With just a few lines per resource, you can define the application you want and
 model it using YAML. You provide AWS SAM with simplified instructions for
 your environment and during deployment AWS SAM transforms and expands the AWS SAM
 
-![AWS SAM](/assets/aws-sam.png)
+```mermaid
+flowchart LR
+  template["AWS SAM template"] --> transform["SAM transform"]
+  transform --> cloudformation["CloudFormation template"]
+  cloudformation --> stack["Deployed AWS stack"]
+```
 
 1. AWS SAM is an application framework that simplifies creation and deployment of
    serverless applications
@@ -972,7 +1089,13 @@ With AWS SAM CLI for testing, you can do the following:
 - Review Lambda functions logs
 - Validate AWS SAM templates
 
-![AWS SAM CLI](/assets/aws-sam-cli.png)
+```mermaid
+flowchart LR
+  init["sam init"] --> local["sam local"]
+  local --> validate["sam validate"]
+  validate --> build["sam build"]
+  build --> deploy["sam deploy"]
+```
 
 AWS SAM CLI launches a Docker container you can interact with to test
 and debug your Lambda function code before deploying to the cloud
@@ -992,7 +1115,13 @@ and debug your Lambda function code before deploying to the cloud
 
 ### Serverless CI/CD pipeline
 
-![Serverless CI/CD pipeline](/assets/serverless-ci-cd-pipeline.png)
+```mermaid
+flowchart LR
+  source["Source control"] --> build["Build and package"]
+  build --> test["Deploy test stack"]
+  test --> verify["Run integration tests"]
+  verify --> prod["Deploy production stack"]
+```
 
 Two application pipelines - one for service A and one for service B. Both Service A
 and Service B pipelines have build, deploy, and test steps to deploy stack A and stack B
@@ -1095,7 +1224,12 @@ called to reserve 20 seats, only 80 of those 100 seats are available for people
 without a reservation. Lambda functions also have a concurrency limit and a
 reservation system that can be used to set aside runtime for specific instances
 
-![Seats available](/assets/seats-available.png)
+```mermaid
+pie title Lambda concurrency allocation
+  "In use" : 40
+  "Reserved" : 20
+  "Available" : 40
+```
 
 Concurrency can be compared to the seating limit in a restaurant. If there are
 100 total seats and 40 are in use and 20 are reserved, only 40 seats are
@@ -1169,14 +1303,37 @@ Immediate Concurrency Increase amount that is dependent on the Region where
 your Lambda function is running. In this example, the account limit is set for
 5,000 concurrent invocations in a Region with an immediate concurrency increase of 3,000.
 
-![1](/assets/1.png)
+```mermaid
+flowchart LR
+  before["100 running invokes"] --> burst["Burst to 4,000 invokes"]
+  burst --> immediate["Add immediate regional burst capacity"]
+  immediate --> running["3,100 running invokes"]
+```
+
 In this example, if the concurrent invocations burst from 100 to 4,000, Lambda will respond by adding the Immediate Concurrency Increase of 3,000 to the 100 concurrent invocations that were running before the burst.
 
-![2](/assets/2.png)
+```mermaid
+flowchart LR
+  minute1["After one minute"] --> evaluate["Evaluate demand and quotas"]
+  evaluate --> add["Add 500 more concurrent invokes"]
+```
+
 After one minute, Lambda evaluates whether more are needed. If the account limit or the burst level has not been reached, Lambda adds 500 additional concurrent invocations. In this example, 500 more concurrent invocations are added.
-![3](/assets/3.png)
+
+```mermaid
+flowchart LR
+  minute2["After another minute"] --> add["Add 500 more concurrent invokes"]
+  add --> enough["Capacity now satisfies burst"]
+```
+
 After a second minute, another 500 concurrent invocations are added. After another minute, Lambda evaluates that there are enough concurrent invocations available to handle the burst, and the evaluate/add cycle ends.
-![4](/assets/4.png)
+
+```mermaid
+flowchart LR
+  burst["Burst demand"] --> limit["Function reserved concurrency limit"]
+  limit --> throttle["Throttle requests above limit"]
+```
+
 If you consider the same burst for a function that has a concurrency limit set for 1,000, Lambda would immediately increase the concurrent invocations to 1,000. By having reached the function limit. Lambda would start throttling invocations to keep the concurrent invocations no higher than 1,000.
 
 ## CloudWatch metrics for concurrency
@@ -1257,12 +1414,21 @@ you can use that same blueprint to build many identical houses. With serverless,
 everything that your Lambda functions needs is included in the blue print,
 called the CloudFormation Template
 
-![Build 1](/assets/build-1.png)
+```mermaid
+flowchart LR
+  idea["Application design"] --> blueprint["Infrastructure template"]
+  blueprint --> stack["Repeatable serverless stack"]
+```
 
 Serverless can be compared to building a house by using a blueprint. With
 this blueprint, you can build the same house anywhere in the world
 
-![Build 2](/assets/build-2.png)
+```mermaid
+flowchart LR
+  template["CloudFormation template"] --> accountA["AWS account A"]
+  template --> accountB["AWS account B"]
+  template --> accountC["AWS account C"]
+```
 
 When you deploy lambda functions the blueprint takes the form of an AWS
 CloudFormation template
@@ -1282,7 +1448,13 @@ single source of truth for deploying identical stack into any AWS account. Each
 time the Lambda function is invoked, it runs by using information provided in
 the CloudFormation template
 
-![Build 3](/assets/build-3.png)
+```mermaid
+flowchart LR
+  template["Single source of truth"] --> lambda["Lambda function"]
+  template --> api["API Gateway"]
+  template --> role["IAM role"]
+  template --> logs["CloudWatch logs"]
+```
 
 A single template can deploy identical Lambda functions within multiple AWS accounts
 
@@ -1310,7 +1482,13 @@ debugging
 
 After testing is successful, DevOps follows a similar deployment process to update production instances with the tested application components. The build scripts and the environment that your code is deployed into are already established and waiting for your application code. This process is like the prebuilt house that is ready and waiting for you to move in.
 
-![Test and debug serverless applications](/assets/test-and-debug.png)
+```mermaid
+flowchart LR
+  local["Local IDE"] --> debug["Debug with local tools"]
+  debug --> source["Commit to source control"]
+  source --> testEnv["Deploy to test environment"]
+  testEnv --> integration["Run integration tests"]
+```
 
 1. Code is written locally in the integrated development environment (IDE).
 2. The code is tested and debugged locally until the developer feels confident in the code.
@@ -1335,7 +1513,13 @@ designated AWS accounts for testing. You can then perform realistic testing
 of your application in the cloud. With the appropriate access permissions, you can deploy
 an test your stack to any development, testing, staging, or production account in your organization
 
-![Test and debug AWS test account](/assets/test-and-debug-aws-test-account.png)
+```mermaid
+flowchart LR
+  developer["Developer"] --> sandbox["AWS test account"]
+  sandbox --> stack["Temporary serverless stack"]
+  stack --> tests["Cloud-based test and debug cycle"]
+  tests --> cleanup["Delete stack when finished"]
+```
 
 **AWS SAM makes serverless development easier.**
 **AWS SAM is a simplified set of CloudFormation commands that makes serverless development easier.**

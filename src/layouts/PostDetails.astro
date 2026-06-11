@@ -49,6 +49,38 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
   <Footer />
 </Layout>
 
+<script>
+  const renderMermaid = async () => {
+    const mermaidSyntax = /^(flowchart|sequenceDiagram|stateDiagram-v2|pie)\b/;
+    const mermaidBlocks = Array.from(document.querySelectorAll("pre")).filter(
+      block => mermaidSyntax.test(block.textContent?.trim() ?? "")
+    );
+
+    if (!mermaidBlocks.length) return;
+
+    const { default: mermaid } = await import(
+      "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"
+    );
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "dark",
+      securityLevel: "strict",
+    });
+
+    mermaidBlocks.forEach(block => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "mermaid my-8 overflow-x-auto rounded-lg p-4";
+      wrapper.textContent = block.textContent ?? "";
+      block.replaceWith(wrapper);
+    });
+
+    await mermaid.run({ querySelector: ".mermaid" });
+  };
+
+  renderMermaid();
+</script>
+
 <style>
   main {
     @apply mx-auto w-full max-w-3xl px-4 pb-12;
