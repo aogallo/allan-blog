@@ -1,3 +1,14 @@
+---
+title: Lead Interview
+description: Interview preparation notes for a technical lead role, covering background, leadership, cloud experience, mobile development, and project stories.
+pubDatetime: 2026-06-11T00:00:00Z
+tags:
+  - career
+  - interview
+  - leadership
+draft: true
+---
+
 # Lead Interview
 
 ## Question 1: Tell me about yourself and your background
