@@ -25,6 +25,9 @@ pnpm-debug.log*
 # ignore Jampack cache files
 .jampack/
 
+# local AI/tooling artifacts
+.atl/
+
 # yarn
 .yarn/*
 !.yarn/patches
