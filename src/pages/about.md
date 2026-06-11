@@ -5,25 +5,18 @@ title: About
 
 [⬇ Download Resume](/resume.pdf)
 
-I'm a Software Engineer with 11+ years of experience building web, mobile, and data engineering solutions across multiple industries.
+Engineering Manager and Tech Lead with 12+ years building scalable cloud systems and leading engineering teams across web, mobile, and data platforms.
 
-My expertise spans TypeScript, Node.js, React.js, React Native, Expo, Astro, and SSR with Next.js for web and mobile application development.
+My technical stack spans TypeScript, Node.js, React, React Native, Next.js, Python, and Astro. On the infrastructure side I work with AWS (Lambda, API Gateway, QLDB, Amplify), Docker, and serverless architectures — with hands-on experience in REST APIs, GraphQL, data pipelines, and ETL.
 
-On the back-end, I work with AWS services, Apache Airflow, Data pipelines, languages such as Typescript, Python, and Golang with experience in REST and GraphQL APIs.
-
-Database technologies in my toolkit include MongoDB, DynamoDB, PostgreSQL, and Microsoft SQL Server.
-
-Also, I'm a Neovim enthusiast with a custom configuration, reflecting my commitment to optimizing my development workflow.
+I'm also a Neovim enthusiast with a custom configuration, and I use AI-assisted development tools (Cursor, Claude) to sharpen team velocity.
 
 ## Experience
 
-**[Job Title]** · [Company] · [Year] – Present
-Brief description of your role and key impact.
+**Software Engineer** · 3 Pillar Global · Feb 2022 – March 2026
+Led cross-platform development (React Native + ReactJS), designed a serverless data processing architecture on AWS (Lambda, S3, QLDB), built financial reporting dashboards with Next.js, and cut deployment time by 70–90% via CI/CD pipelines.
 
-**[Job Title]** · [Company] · [Year] – [Year]
-Brief description of your role and key impact.
-
-**[Job Title]** · [Company] · [Year] – [Year]
-Brief description of your role and key impact.
+**Engineering Manager** · Universidad del Valle de Guatemala · Dec 2012 – Feb 2022
+Led and mentored a team of 6 engineers (95% sprint completion rate). Drove migration from monolithic to microservices, improving system performance by 50%. Designed REST and GraphQL APIs serving 15,000+ users.
 
 ## Tech Stack
