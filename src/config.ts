@@ -3,9 +3,9 @@ import type { Site, SocialObjects } from "./types";
 export const SITE: Site = {
   website: "http://www.allan-gallo.com",
   author: "Allan Gallo",
-  desc: "Blog and Portfolio",
+  desc: "Allan Gallo — Software Engineer with 11+ years of experience in TypeScript, React, AWS, and data engineering. Writing about web dev, cloud architecture, and software craft.",
   title: "Allan Gallo",
-  ogImage: "astropaper-og.jpg",
+  ogImage: "og.png",
   lightAndDarkMode: true,
   postPerPage: 3,
 };
@@ -27,18 +27,6 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
   {
-    name: "Facebook",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Facebook`,
-    active: false,
-  },
-  {
-    name: "Instagram",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Instagram`,
-    active: false,
-  },
-  {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/aogallo/",
     linkTitle: `${SITE.title} on LinkedIn`,
@@ -48,7 +36,7 @@ export const SOCIALS: SocialObjects = [
     name: "Mail",
     href: "mailto:allan.gallo.guerra@gmail.com",
     linkTitle: `Send an email to ${SITE.title}`,
-    active: false,
+    active: true,
   },
   {
     name: "Twitter",

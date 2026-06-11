@@ -31,12 +31,30 @@ Personal blog to share configurations such as Neovim, Tmux, and install processe
 - **@divriots/jampack** — post-build optimization (HTML/CSS/JS)
 - GitHub Actions — CI/CD
 
-## Contents
+### Blog Posts
 
-- Neovim configuration
-- Development environment guides (Pyenv, etc.)
-- Personal portfolio
-- Technical learning notes
+Technical guides and tutorials on:
+
+- **Neovim**: Configuration, plugins, motions, spell checking
+- **Development Environment**: Terminal setup, pyenv, symbolic links
+- **AstroPaper Theming**: Color schemes, OG images, CMS integration
+- **Web Development**: Tailwind Typography, portfolio building
+
+### Projects
+
+- Real Estate Search with LLM (React + FastAPI + Groq + PostgreSQL)
+- Package Tracker
+- Quiz App (React Native)
+- Go API, Node.js REST API, .NET Todo API
+
+## Quick Start
+
+```bash
+yarn install
+yarn dev      # Development server
+yarn build    # Production build (runs jampack automatically)
+yarn format   # Format with Prettier
+```
 
 ## Scripts
 
