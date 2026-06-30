@@ -80,10 +80,12 @@ const allTags = [...new Set(projects.flatMap((project) => project.data.tags || [
       items.forEach((item) => {
         const itemTags = JSON.parse(item.getAttribute("data-tags") || "[]");
 
+        if (!(item instanceof HTMLElement)) return;
+
         if (tag === "all" || itemTags.includes(tag)) {
-          (item as HTMLElement).style.display = "block";
+          item.style.display = "block";
         } else {
-          (item as HTMLElement).style.display = "none";
+          item.style.display = "none";
         }
       });
     });
